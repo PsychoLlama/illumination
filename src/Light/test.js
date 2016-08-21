@@ -122,4 +122,49 @@ describe('A light', () => {
 
 	});
 
+	describe('`color()`', () => {
+
+		it('should turn color names into hue/sat/bri', () => {
+			light.color('blue');
+			expect(light.toJSON().state).toEqual({
+				hue: 43690,
+				sat: 254,
+				bri: 127,
+			});
+		});
+
+		it('should turn hex codes into hue/sat/bri', () => {
+			light.color('#abcdef');
+			expect(light.toJSON().state).toEqual({
+				hue: 38228,
+				sat: 172,
+				bri: 204,
+			});
+		});
+
+		it('should turn rgb() into hue/sat/bri', () => {
+			light.color('rgb(50, 75, 100)');
+			expect(light.toJSON().state).toEqual({
+				hue: 38228,
+				sat: 84,
+				bri: 75,
+			});
+		});
+
+		it('should turn hsl() into hue/sat/bri', () => {
+			light.color('hsl(200, 75%, 75%)');
+			expect(light.toJSON().state).toEqual({
+				hue: 36408,
+				sat: 190,
+				bri: 190,
+			});
+		});
+
+		it('should return the context', () => {
+			const result = light.color('red');
+			expect(result).toBe(light);
+		});
+
+	});
+
 });

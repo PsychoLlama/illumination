@@ -1,3 +1,4 @@
+import color from 'tinycolor2';
 const light = Symbol('light state');
 
 export default class Light {
@@ -84,6 +85,26 @@ export default class Light {
 		/** Turn it into a number from 1 to 254. */
 		const bri = Math.floor(percent * 253) + 1;
 		this[light].state.bri = bri;
+
+		return this;
+	}
+
+	/**
+	 * Set the color (de-sugars to hue(), sat(), bri()).
+	 *
+	 * @param  {String} value - Pretty much any color expression
+	 * you can use in CSS.
+	 * @returns {this} - The context.
+	 */
+	color (value) {
+
+		/** Turn the expression into an HSL value. */
+		const hsl = color(value).toHsl();
+
+		/** Set the hue, saturation, and brightness. */
+		this.hue(hsl.h);
+		this.sat(hsl.s);
+		this.bri(hsl.l);
 
 		return this;
 	}
