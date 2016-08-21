@@ -76,6 +76,26 @@ describe('A light', () => {
 
 	});
 
+	describe('`sat()`', () => {
+
+		it('should turn percentages into 0-254', () => {
+			light.sat(0);
+			expect(light.toJSON().state.sat).toBe(0);
+
+			light.sat(1);
+			expect(light.toJSON().state.sat).toBe(254);
+
+			light.sat(0.5);
+			expect(light.toJSON().state.sat).toBe(127);
+		});
+
+		it('should return the context', () => {
+			const result = light.sat(0.8);
+			expect(result).toBe(light);
+		});
+
+	});
+
 	describe('`bri()`', () => {
 
 		it('should turn percents into 1-254 range', () => {

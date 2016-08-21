@@ -61,6 +61,19 @@ export default class Light {
 	}
 
 	/**
+	 * Set the color saturation.
+	 *
+	 * @param  {Float} percent - A number from 0 to 1.
+	 * @returns {this} - The context.
+	 */
+	sat (percent) {
+		const sat = Math.floor(percent * 254);
+		this[light].state.sat = sat;
+
+		return this;
+	}
+
+	/**
 	 * Set the brightness of a light.
 	 *
 	 * @param  {Float} percent - A number between 0 and 1.
