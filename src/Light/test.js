@@ -56,6 +56,26 @@ describe('A light', () => {
 
 	});
 
+	describe('`hue()`', () => {
+
+		it('should turn degrees into 0-65mil values', () => {
+			light.hue(0);
+			expect(light.toJSON().state.hue).toBe(0);
+
+			light.hue(200);
+			expect(light.toJSON().state.hue).toBe(36408);
+
+			light.hue(360);
+			expect(light.toJSON().state.hue).toBe(0xffff);
+		});
+
+		it('should return the context', () => {
+			const result = light.hue(5);
+			expect(result).toBe(light);
+		});
+
+	});
+
 	describe('`bri()`', () => {
 
 		it('should turn percents into 1-254 range', () => {

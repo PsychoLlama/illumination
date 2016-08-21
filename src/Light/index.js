@@ -42,6 +42,25 @@ export default class Light {
 	}
 
 	/**
+	 * Set the color hue a light should be.
+	 *
+	 * @param  {Number} degrees - A number from 0-360, representing
+	 * the degrees on a color wheel.
+	 * @returns {this} - The context.
+	 */
+	hue (degrees) {
+
+		/** Find the degree percentage. */
+		const percent = degrees / 360;
+
+		/** Multiply it by the maximum hue value. */
+		const hex = Math.floor(percent * 0xffff);
+		this[light].state.hue = hex;
+
+		return this;
+	}
+
+	/**
 	 * Set the brightness of a light.
 	 *
 	 * @param  {Float} percent - A number between 0 and 1.
