@@ -42,6 +42,21 @@ export default class Light {
 	}
 
 	/**
+	 * Set the brightness of a light.
+	 *
+	 * @param  {Float} percent - A number between 0 and 1.
+	 * @returns {this} - The context.
+	 */
+	bri (percent) {
+
+		/** Turn it into a number from 1 to 254. */
+		const bri = Math.floor(percent * 253) + 1;
+		this[light].state.bri = bri;
+
+		return this;
+	}
+
+	/**
 	 * Gives a serializable value to JSON.stringify. Called
 	 * under the hood by JSON.
 	 *

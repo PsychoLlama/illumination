@@ -56,4 +56,30 @@ describe('A light', () => {
 
 	});
 
+	describe('`bri()`', () => {
+
+		it('should turn percents into 1-254 range', () => {
+			light.bri(0);
+			expect(light.toJSON()).toEqual({
+				state: { bri: 1 },
+			});
+
+			light.bri(1);
+			expect(light.toJSON()).toEqual({
+				state: { bri: 254 },
+			});
+
+			light.bri(0.5);
+			expect(light.toJSON()).toEqual({
+				state: { bri: 127 },
+			});
+		});
+
+		it('should return the context', () => {
+			const result = light.bri(0.3);
+			expect(result).toBe(light);
+		});
+
+	});
+
 });
