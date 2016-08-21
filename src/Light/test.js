@@ -167,4 +167,20 @@ describe('A light', () => {
 
 	});
 
+	describe('`transition()`', () => {
+
+		it('should convert milliseconds', () => {
+			light.transition(500);
+			expect(light.toJSON()).toContain({
+				transitiontime: 5,
+			});
+		});
+
+		it('should return the context', () => {
+			const result = light.transition(300);
+			expect(result).toBe(light);
+		});
+
+	});
+
 });

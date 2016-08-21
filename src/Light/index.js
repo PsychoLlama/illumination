@@ -110,6 +110,20 @@ export default class Light {
 	}
 
 	/**
+	 * Set the update transition time.
+	 *
+	 * @param  {Number} ms - The time in milliseconds. Lights default
+	 * to 400ms.
+	 * @returns {this} - The context.
+	 */
+	transition (ms) {
+		const time = ms / 100;
+		this[light].transitiontime = time;
+
+		return this;
+	}
+
+	/**
 	 * Gives a serializable value to JSON.stringify. Called
 	 * under the hood by JSON.
 	 *
