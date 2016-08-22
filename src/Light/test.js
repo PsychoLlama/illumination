@@ -183,4 +183,18 @@ describe('A light', () => {
 
 	});
 
+	describe('`effect()`', () => {
+
+		it('should set colorloop', () => {
+			light.effect('colorloop');
+			expect(light.toJSON().effect).toBe('colorloop');
+		});
+
+		it('should return the context', () => {
+			const result = light.effect('colorloop');
+			expect(result).toBe(light);
+		});
+
+	});
+
 });

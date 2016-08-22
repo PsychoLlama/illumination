@@ -124,6 +124,19 @@ export default class Light {
 	}
 
 	/**
+	 * Enable a light effect.
+	 *
+	 * @param  {String} type - Either `colorloop` or `none`.
+	 * Mostly boring.
+	 * @returns {this} - The context.
+	 */
+	effect (type) {
+		this[light].effect = type;
+
+		return this;
+	}
+
+	/**
 	 * Gives a serializable value to JSON.stringify. Called
 	 * under the hood by JSON.
 	 *
