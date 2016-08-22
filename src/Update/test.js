@@ -2,14 +2,39 @@ import Update from './index';
 import { describe, it, beforeEach } from 'mocha';
 import expect from 'expect';
 
-describe('An update', () => {
+describe('Update', () => {
 	let update;
 
 	beforeEach(() => (update = new Update()));
 
+	describe('.from', () => {
+
+		it('should create a new update', () => {
+			const update = Update.from();
+			expect(update).toBeAn(Update);
+		});
+
+		it('should accept light api objects', () => {
+			const value = {
+				state: { bri: 100 },
+				name: 'Living Room',
+			};
+			const update = Update.from(value);
+			expect(update.toJSON()).toEqual(value);
+		});
+
+		it('should accept former update instances', () => {
+			update.name('Living Room');
+			const copy = JSON.parse(JSON.stringify(update));
+			const result = Update.from(copy);
+			expect(update.toJSON()).toEqual(result.toJSON());
+		});
+
+	});
+
 	describe('`on()`', () => {
 
-		it('should return `this`', () => {
+		it('should return the context', () => {
 			const value = update.on(false);
 			expect(value).toBe(update);
 		});

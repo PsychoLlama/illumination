@@ -2,6 +2,22 @@ import color from 'tinycolor2';
 const update = Symbol('light state');
 
 export default class Update {
+
+	/**
+	 * Pull in a hue state and mutate it as an update. Also
+	 * works with old update instances.
+	 *
+	 * @param {Object} source - A bridge api-compliant light
+	 * object. Can also be an object from an Update instance.
+	 * @returns {Update} - A new update instance.
+	 */
+	static 'from' (source) {
+		const value = new Update();
+		value[update] = source;
+
+		return value;
+	}
+
 	constructor () {
 		this[update] = {
 			state: {},
