@@ -1,9 +1,9 @@
 import color from 'tinycolor2';
-const light = Symbol('light state');
+const update = Symbol('light state');
 
-export default class Light {
+export default class Update {
 	constructor () {
-		this[light] = {
+		this[update] = {
 			state: {},
 		};
 	}
@@ -15,7 +15,7 @@ export default class Light {
 	 * @returns {this} - The context.
 	 */
 	on (on) {
-		this[light].state.on = Boolean(on);
+		this[update].state.on = Boolean(on);
 
 		return this;
 	}
@@ -37,7 +37,7 @@ export default class Light {
 	 * @returns {this} - The context.
 	 */
 	name (name) {
-		this[light].name = name;
+		this[update].name = name;
 
 		return this;
 	}
@@ -56,7 +56,7 @@ export default class Light {
 
 		/** Multiply it by the maximum hue value. */
 		const hex = Math.floor(percent * 0xffff);
-		this[light].state.hue = hex;
+		this[update].state.hue = hex;
 
 		return this;
 	}
@@ -69,7 +69,7 @@ export default class Light {
 	 */
 	sat (percent) {
 		const sat = Math.floor(percent * 254);
-		this[light].state.sat = sat;
+		this[update].state.sat = sat;
 
 		return this;
 	}
@@ -84,7 +84,7 @@ export default class Light {
 
 		/** Turn it into a number from 1 to 254. */
 		const bri = Math.floor(percent * 253) + 1;
-		this[light].state.bri = bri;
+		this[update].state.bri = bri;
 
 		return this;
 	}
@@ -118,7 +118,7 @@ export default class Light {
 	 */
 	transition (ms) {
 		const time = ms / 100;
-		this[light].transitiontime = time;
+		this[update].transitiontime = time;
 
 		return this;
 	}
@@ -131,12 +131,12 @@ export default class Light {
 	 */
 	colorloop (bool = true) {
 
-		const update = this[light];
+		const state = this[update];
 
 		if (bool) {
-			update.effect = 'colorloop';
+			state.effect = 'colorloop';
 		} else {
-			update.effect = 'none';
+			state.effect = 'none';
 		}
 
 		return this;
@@ -167,7 +167,7 @@ export default class Light {
 			);
 		}
 
-		this[light].alert = alert;
+		this[update].alert = alert;
 
 		return this;
 	}
@@ -180,6 +180,6 @@ export default class Light {
 	 * @returns {Object} - The state update.
 	 */
 	toJSON () {
-		return this[light];
+		return this[update];
 	}
 }
