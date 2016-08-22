@@ -19,19 +19,18 @@ export default class Update {
 	}
 
 	constructor () {
-		this[update] = {
-			state: {},
-		};
+		this[update] = {};
 	}
 
 	/**
 	 * Set whether the light is on.
 	 *
-	 * @param  {Boolean} on - Whether or not the light should be on.
+	 * @param  {Boolean} on=true - Whether or not the light should
+	 * be on.
 	 * @returns {this} - The context.
 	 */
-	on (on) {
-		this[update].state.on = Boolean(on);
+	on (on = true) {
+		this[update].on = Boolean(on);
 
 		return this;
 	}
@@ -72,7 +71,7 @@ export default class Update {
 
 		/** Multiply it by the maximum hue value. */
 		const hex = Math.floor(percent * 0xffff);
-		this[update].state.hue = hex;
+		this[update].hue = hex;
 
 		return this;
 	}
@@ -85,7 +84,7 @@ export default class Update {
 	 */
 	sat (percent) {
 		const sat = Math.floor(percent * 254);
-		this[update].state.sat = sat;
+		this[update].sat = sat;
 
 		return this;
 	}
@@ -100,7 +99,7 @@ export default class Update {
 
 		/** Turn it into a number from 1 to 254. */
 		const bri = Math.floor(percent * 253) + 1;
-		this[update].state.bri = bri;
+		this[update].bri = bri;
 
 		return this;
 	}

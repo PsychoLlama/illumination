@@ -16,7 +16,7 @@ describe('Update', () => {
 
 		it('should accept light api objects', () => {
 			const value = {
-				state: { bri: 100 },
+				bri: 100,
 				name: 'Living Room',
 			};
 			const update = Update.from(value);
@@ -41,11 +41,16 @@ describe('Update', () => {
 
 		it('should set `on` to the boolean', () => {
 			expect(new Update().on(true).toJSON()).toEqual({
-				state: { on: true },
+				on: true,
 			});
 			expect(new Update().on(false).toJSON()).toEqual({
-				state: { on: false },
+				on: false,
 			});
+		});
+
+		it('should default to "true"', () => {
+			update.on();
+			expect(update.toJSON().on).toBe(true);
 		});
 
 	});
@@ -54,10 +59,10 @@ describe('Update', () => {
 
 		it('should set `on` to the opposite of it\'s arg', () => {
 			expect(new Update().off(true).toJSON()).toEqual({
-				state: { on: false },
+				on: false,
 			});
 			expect(new Update().off(false).toJSON()).toEqual({
-				state: { on: true },
+				on: true,
 			});
 		});
 
@@ -85,13 +90,13 @@ describe('Update', () => {
 
 		it('should turn degrees into 0-65mil values', () => {
 			update.hue(0);
-			expect(update.toJSON().state.hue).toBe(0);
+			expect(update.toJSON().hue).toBe(0);
 
 			update.hue(200);
-			expect(update.toJSON().state.hue).toBe(36408);
+			expect(update.toJSON().hue).toBe(36408);
 
 			update.hue(360);
-			expect(update.toJSON().state.hue).toBe(0xffff);
+			expect(update.toJSON().hue).toBe(0xffff);
 		});
 
 		it('should return the context', () => {
@@ -105,13 +110,13 @@ describe('Update', () => {
 
 		it('should turn percentages into 0-254', () => {
 			update.sat(0);
-			expect(update.toJSON().state.sat).toBe(0);
+			expect(update.toJSON().sat).toBe(0);
 
 			update.sat(1);
-			expect(update.toJSON().state.sat).toBe(254);
+			expect(update.toJSON().sat).toBe(254);
 
 			update.sat(0.5);
-			expect(update.toJSON().state.sat).toBe(127);
+			expect(update.toJSON().sat).toBe(127);
 		});
 
 		it('should return the context', () => {
@@ -125,19 +130,13 @@ describe('Update', () => {
 
 		it('should turn percents into 1-254 range', () => {
 			update.bri(0);
-			expect(update.toJSON()).toEqual({
-				state: { bri: 1 },
-			});
+			expect(update.toJSON()).toEqual({ bri: 1 });
 
 			update.bri(1);
-			expect(update.toJSON()).toEqual({
-				state: { bri: 254 },
-			});
+			expect(update.toJSON()).toEqual({ bri: 254 });
 
 			update.bri(0.5);
-			expect(update.toJSON()).toEqual({
-				state: { bri: 127 },
-			});
+			expect(update.toJSON()).toEqual({ bri: 127 });
 		});
 
 		it('should return the context', () => {
@@ -151,7 +150,7 @@ describe('Update', () => {
 
 		it('should turn color names into hue/sat/bri', () => {
 			update.color('blue');
-			expect(update.toJSON().state).toEqual({
+			expect(update.toJSON()).toEqual({
 				hue: 43690,
 				sat: 254,
 				bri: 127,
@@ -160,7 +159,7 @@ describe('Update', () => {
 
 		it('should turn hex codes into hue/sat/bri', () => {
 			update.color('#abcdef');
-			expect(update.toJSON().state).toEqual({
+			expect(update.toJSON()).toEqual({
 				hue: 38228,
 				sat: 172,
 				bri: 204,
@@ -169,7 +168,7 @@ describe('Update', () => {
 
 		it('should turn rgb() into hue/sat/bri', () => {
 			update.color('rgb(50, 75, 100)');
-			expect(update.toJSON().state).toEqual({
+			expect(update.toJSON()).toEqual({
 				hue: 38228,
 				sat: 84,
 				bri: 75,
@@ -178,7 +177,7 @@ describe('Update', () => {
 
 		it('should turn hsl() into hue/sat/bri', () => {
 			update.color('hsl(200, 75%, 75%)');
-			expect(update.toJSON().state).toEqual({
+			expect(update.toJSON()).toEqual({
 				hue: 36408,
 				sat: 190,
 				bri: 190,
