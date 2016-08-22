@@ -183,15 +183,26 @@ describe('A light', () => {
 
 	});
 
-	describe('`effect()`', () => {
+	describe('`colorloop()`', () => {
 
-		it('should set colorloop', () => {
-			light.effect('colorloop');
+		it('should start a colorloop', () => {
+			light.colorloop(true);
+			expect(light.toJSON().effect).toBe('colorloop');
+		});
+
+		it('should disable when called with "false"', () => {
+			light.colorloop(true);
+			light.colorloop(false);
+			expect(light.toJSON().effect).toBe('none');
+		});
+
+		it('should default to "true"', () => {
+			light.colorloop();
 			expect(light.toJSON().effect).toBe('colorloop');
 		});
 
 		it('should return the context', () => {
-			const result = light.effect('colorloop');
+			const result = light.colorloop();
 			expect(result).toBe(light);
 		});
 

@@ -126,12 +126,18 @@ export default class Light {
 	/**
 	 * Enable a light effect.
 	 *
-	 * @param  {String} type - Either `colorloop` or `none`.
-	 * Mostly boring.
+	 * @param  {Boolean} bool=true - Whether to turn on the colorloop.
 	 * @returns {this} - The context.
 	 */
-	effect (type) {
-		this[light].effect = type;
+	colorloop (bool = true) {
+
+		const update = this[light];
+
+		if (bool) {
+			update.effect = 'colorloop';
+		} else {
+			update.effect = 'none';
+		}
 
 		return this;
 	}
