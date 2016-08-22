@@ -208,4 +208,37 @@ describe('A light', () => {
 
 	});
 
+	describe('blink', () => {
+
+		it('should set "alert" to "select"', () => {
+			light.blink('once');
+			expect(light.toJSON().alert).toBe('select');
+		});
+
+		it('should default to "once"', () => {
+			light.blink();
+			expect(light.toJSON().alert).toBe('select');
+		});
+
+		it('should turn "long" into "lselect"', () => {
+			light.blink('long');
+			expect(light.toJSON().alert).toBe('lselect');
+		});
+
+		it('should turn "off" into "none"', () => {
+			light.blink('off');
+			expect(light.toJSON().alert).toBe('none');
+		});
+
+		it('should throw if given bad input', () => {
+			expect(() => light.blink('potatoes')).toThrow();
+		});
+
+		it('should return the context', () => {
+			const result = light.blink();
+			expect(result).toBe(light);
+		});
+
+	});
+
 });

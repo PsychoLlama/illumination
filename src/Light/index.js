@@ -143,6 +143,36 @@ export default class Light {
 	}
 
 	/**
+	 * Blinks the lights.
+	 *
+	 * @throws {TypeError} - If an invalid string is given.
+	 * @param  {String} type='once' - Can be "once", "long", or "off".
+	 * @returns {this} - The context.
+	 */
+	blink (type = 'once') {
+		let alert;
+
+		switch (type) {
+			case 'once':
+				alert = 'select';
+				break;
+			case 'long':
+				alert = 'lselect';
+				break;
+			case 'off':
+				alert = 'none';
+				break;
+			default: throw new TypeError(
+				`Expected "once", "long", or "off", got "${type}".`
+			);
+		}
+
+		this[light].alert = alert;
+
+		return this;
+	}
+
+	/**
 	 * Gives a serializable value to JSON.stringify. Called
 	 * under the hood by JSON.
 	 *
