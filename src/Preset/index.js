@@ -1,4 +1,5 @@
 import Light from '../Light';
+const list = Symbol('lights');
 
 /**
  * Create a list of light states.
@@ -9,11 +10,11 @@ import Light from '../Light';
  */
 export default class Preset {
 	constructor (lights = {}) {
-		this.lights = {};
+		this[list] = {};
 
 		/** Add each light to the list. */
 		Object.entries(lights).forEach(([key, value]) => {
-			this.lights[key] = new Light(value);
+			this[list][key] = new Light(value);
 		});
 	}
 
@@ -31,9 +32,19 @@ export default class Preset {
 		const light = new Light(object);
 
 		/** Add it to the preset. */
-		this.lights[index] = light;
+		this[list][index] = light;
 
 		return this;
+	}
+
+	/**
+	 * Return a list of light IDs.
+	 *
+	 * @returns {String[]} - The light IDs belonging to the preset.
+	 */
+	keys () {
+		const lights = this[list];
+		return Object.keys(lights);
 	}
 
 	/**
@@ -43,7 +54,7 @@ export default class Preset {
 	 * @returns {Light|null} - A light if one is found.
 	 */
 	'get' (index) {
-		return this.lights[index] || null;
+		return this[list][index] || null;
 	}
 
 	/**
@@ -53,6 +64,6 @@ export default class Preset {
 	 * @returns {Object} - The list of lights.
 	 */
 	toJSON () {
-		return this.lights;
+		return this[list];
 	}
 }

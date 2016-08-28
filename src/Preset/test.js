@@ -12,8 +12,7 @@ describe('Preset', () => {
 			hall: {},
 		});
 
-		const keys = Object.keys(preset.lights);
-		expect(keys).toContain('hall');
+		expect(preset.keys()).toContain('hall');
 	});
 
 	it('should turn input into light objects', () => {
@@ -31,7 +30,7 @@ describe('Preset', () => {
 		it('should add a light to a preset', () => {
 			const hall = new Light();
 			preset.add('hall', hall);
-			expect(preset.lights).toContain({ hall });
+			expect(preset.keys()).toContain('hall');
 		});
 
 		it('should turn POJOs into Light instances', () => {
@@ -68,7 +67,10 @@ describe('Preset', () => {
 	describe('`.toJSON`', () => {
 
 		it('should return the list of lights', () => {
-			expect(preset.toJSON()).toBe(preset.lights);
+			const lights = preset.toJSON();
+			const keys = Object.keys(lights);
+
+			expect(keys).toEqual(preset.keys());
 		});
 
 	});
