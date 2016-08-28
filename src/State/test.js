@@ -7,31 +7,26 @@ describe('State', () => {
 
 	beforeEach(() => (state = new State()));
 
-	describe('.from', () => {
-
-		it('should create a new state', () => {
-			const state = State.from({});
-			expect(state).toBeAn(State);
-		});
+	describe('instances', () => {
 
 		it('should accept light api objects', () => {
 			const value = {
 				bri: 100,
 				name: 'Living Room',
 			};
-			const state = State.from(value);
+			const state = new State(value);
 			expect(state.toJSON()).toEqual(value);
 		});
 
 		it('should accept former state instances', () => {
 			state.color('blue');
 			const copy = JSON.parse(JSON.stringify(state));
-			const result = State.from(copy);
+			const result = new State(copy);
 			expect(state.toJSON()).toEqual(result.toJSON());
 		});
 
 		it('should ignore non-hsl color modes', () => {
-			const state = State.from({
+			const state = new State({
 				xy: [1.5, 2.5],
 				ct: 123,
 				hue: 5,
@@ -43,7 +38,7 @@ describe('State', () => {
 		});
 
 		it('should ignore useless properties', () => {
-			const state = State.from({
+			const state = new State({
 				reachable: true,
 				colormode: 'xy',
 				alert: 'lselect',

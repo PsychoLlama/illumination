@@ -1,19 +1,19 @@
 import color from 'tinycolor2';
 const update = Symbol('light state');
 
+/**
+ * Easier interface for hue state objects.
+ *
+ * @param {Object} [source] - A hue state object (as found
+ * in a bridge /lights response).
+ * @class State
+ */
 export default class State {
 
-	/**
-	 * Pull in a hue state and mutate it as an update. Also
-	 * works with old update instances.
-	 *
-	 * @param {Object} source - A bridge api-compliant state
-	 * object. Can also be an object from an State instance.
-	 * @returns {State} - A new update instance.
-	 */
-	static 'from' (source) {
-		const state = new State();
+	constructor (source = {}) {
+		this[update] = {};
 
+		/** Remove troublesome properties. */
 		Object.keys(source).filter((key) => (
 			key !== 'ct' &&
 			key !== 'xy' &&
@@ -21,14 +21,11 @@ export default class State {
 			key !== 'reachable' &&
 			key !== 'colormode'
 		)).forEach((key) => {
-			state[update][key] = source[key];
+
+			/** Add each key to the state. */
+			this[update][key] = source[key];
 		});
 
-		return state;
-	}
-
-	constructor () {
-		this[update] = {};
 	}
 
 	/**

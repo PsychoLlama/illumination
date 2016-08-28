@@ -11,6 +11,6 @@ export default class Light {
 		Object.assign(this, light);
 
 		const state = light.state || {};
-		this.state = State.from(state);
+		this.state = new State(state);
 	}
 }
