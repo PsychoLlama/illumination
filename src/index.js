@@ -1,2 +1,4 @@
 import State from './State';
-export { State };
+import Light from './Light';
+
+export { State, Light };
