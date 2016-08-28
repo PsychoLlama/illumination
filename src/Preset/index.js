@@ -63,6 +63,25 @@ export default class Preset {
 	}
 
 	/**
+	 * Sets the color across the entire preset.
+	 *
+	 * @param  {Mixed} color - Any CSS color expression.
+	 * @returns {this} - The context.
+	 */
+	color (color) {
+
+		this.keys()
+
+			/** Get each light's state. */
+			.map((id) => this.get(id).state)
+
+			/** Set the state's color. */
+			.forEach((state) => state.color(color));
+
+		return this;
+	}
+
+	/**
 	 * Turn a preset into a serializable structure.
 	 *
 	 * @private

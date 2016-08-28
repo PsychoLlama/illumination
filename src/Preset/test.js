@@ -70,6 +70,23 @@ describe('Preset', () => {
 
 	});
 
+	describe('`.color`', () => {
+
+		it('should set the color of each light', () => {
+			preset.add('light', new Light());
+			const control = new Light().state.color('blue');
+			const state = preset.color('blue').get('light').state;
+
+			expect(state.toJSON()).toEqual(control.toJSON());
+		});
+
+		it('should return the context', () => {
+			const result = preset.color('#303438');
+			expect(result).toBe(preset);
+		});
+
+	});
+
 	describe('`.toJSON`', () => {
 
 		it('should return the list of lights', () => {
