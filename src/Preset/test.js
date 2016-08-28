@@ -1,5 +1,5 @@
 import { describe, it, beforeEach } from 'mocha';
-import expect from 'expect';
+import expect, { createSpy } from 'expect';
 import Preset from './index';
 import Light from '../Light';
 
@@ -82,6 +82,37 @@ describe('Preset', () => {
 
 		it('should return the context', () => {
 			const result = preset.color('#303438');
+			expect(result).toBe(preset);
+		});
+
+	});
+
+	describe('`.each`', () => {
+
+		beforeEach(() => {
+			preset.add('light 1', new Light());
+			preset.add('light 2', new Light());
+		});
+
+		it('should call the callback for each light', () => {
+			const spy = createSpy();
+			preset.each(spy);
+
+			expect(spy.calls.length).toBe(2);
+		});
+
+		it('should pass the light and ID', () => {
+			const spy = createSpy();
+			preset.each(spy);
+			const key = 'light 1';
+
+			expect(spy).toHaveBeenCalledWith(
+				preset.get(key), key, preset
+			);
+		});
+
+		it('should return the context', () => {
+			const result = preset.each(() => {});
 			expect(result).toBe(preset);
 		});
 

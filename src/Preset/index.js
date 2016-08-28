@@ -63,6 +63,28 @@ export default class Preset {
 	}
 
 	/**
+	 * Iterate over each light in the preset.
+	 *
+	 * @param  {Function} callback - Called for each light in the
+	 * preset, given the light, lightID, and the preset itself.
+	 * @returns {this} - The context.
+	 */
+	each (callback) {
+
+		/** Iterate over each light ID. */
+		this.keys().forEach((key) => {
+
+			/** Get the light. */
+			const light = this.get(key);
+
+			/** Call the callback. */
+			callback(light, key, this);
+		});
+
+		return this;
+	}
+
+	/**
 	 * Sets the color across the entire preset.
 	 *
 	 * @param  {Mixed} color - Any CSS color expression.
@@ -70,13 +92,8 @@ export default class Preset {
 	 */
 	color (color) {
 
-		this.keys()
-
-			/** Get each light's state. */
-			.map((id) => this.get(id).state)
-
-			/** Set the state's color. */
-			.forEach((state) => state.color(color));
+		/** Set the color for each light. */
+		this.each(({ state }) => state.color(color));
 
 		return this;
 	}
