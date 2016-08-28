@@ -21,15 +21,14 @@ export default class Preset {
 	 * Add a light to the preset.
 	 *
 	 * @param  {String} index - The light ID.
-	 * @param  {Light} light - A light instance.
+	 * @param  {Light} object - An object representing
+	 * a light.
 	 * @returns {this} - The context.
 	 */
-	add (index, light) {
+	add (index, object) {
 
 		/** Ensure `light` is a Light instance. */
-		if (!(light instanceof Light)) {
-			light = new Light(light);
-		}
+		const light = new Light(object);
 
 		/** Add it to the preset. */
 		this.lights[index] = light;

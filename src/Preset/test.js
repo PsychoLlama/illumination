@@ -41,6 +41,14 @@ describe('Preset', () => {
 			expect(result).toBeA(Light);
 		});
 
+		it('should copy lights, not reuse', () => {
+			const lamp = new Light();
+			const red = new Preset().add('lamp', lamp);
+			const blue = new Preset().add('lamp', lamp);
+
+			expect(red.get('lamp')).toNotBe(blue.get('lamp'));
+		});
+
 		it('should return the context', () => {
 			const result = preset.add('light', new Light());
 			expect(result).toBe(preset);
