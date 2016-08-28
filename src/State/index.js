@@ -41,7 +41,7 @@ export default class State {
 	 * @param  {Boolean} off - Whether or not the light should be off.
 	 * @returns {this} - The context.
 	 */
-	off (off) {
+	off (off = true) {
 		return this.on(!off);
 	}
 

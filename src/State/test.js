@@ -66,6 +66,11 @@ describe('State', () => {
 			});
 		});
 
+		it('should default to true', () => {
+			state.off();
+			expect(state.toJSON().on).toBe(false);
+		});
+
 		it('should return the context', () => {
 			expect(state.off(true)).toBe(state);
 		});
