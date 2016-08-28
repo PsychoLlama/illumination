@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 /**
  * Hue bridge interface.
  *
@@ -44,5 +46,20 @@ export default class Bridge {
 
 		/** Join the url and prefix the http protocol. */
 		return `http://${url.join('/')}`;
+	}
+
+	/**
+	 * Format and send a request to the bridge.
+	 *
+	 * @param  {Mixed} [path] - Anything you can pass to `.url`.
+	 * @returns {Promise} - Resolves to the response data.
+	 */
+	'get' (...path) {
+
+		/** Format a url. */
+		const url = this.url(...path);
+
+		/** Dispatch the request. */
+		return axios.get(url).then((res) => res.data);
 	}
 }
