@@ -1,6 +1,12 @@
 import color from 'tinycolor2';
 const update = Symbol('light state');
 
+const blinkStates = {
+	off: 'none',
+	once: 'select',
+	long: 'lselect',
+};
+
 /**
  * Easier interface for hue state objects.
  *
@@ -159,26 +165,17 @@ export default class State {
 	 * @returns {this} - The context.
 	 */
 	blink (type = 'once') {
-		let alert;
+		const alert = blinkStates[type];
 
-		switch (type) {
-			case 'once':
-				alert = 'select';
-				break;
-			case 'long':
-				alert = 'lselect';
-				break;
-			case 'off':
-				alert = 'none';
-				break;
-			default: throw new TypeError(
-				`Expected "once", "long", or "off", got "${type}".`
-			);
+		if (alert) {
+			this[update].alert = alert;
+
+			return this;
 		}
 
-		this[update].alert = alert;
-
-		return this;
+		throw new TypeError(
+			`Expected "once", "long", or "off", got "${type}".`
+		);
 	}
 
 	/**
