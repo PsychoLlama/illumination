@@ -2,10 +2,11 @@
   "name": "illumination",
   "version": "0.0.1",
   "description": "Simple, powerful Philips Hue client.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha src/**/*test.js --opts mocha.opts",
     "build": "babel src/ -d dist/ --ignore **/*test.js",
+		"dev": "npm run build -- --watch",
     "lint": "eslint src/"
   },
   "keywords": [],
