@@ -24,7 +24,7 @@ describe('State', () => {
 		});
 
 		it('should accept former state instances', () => {
-			state.name('Living Room');
+			state.blink();
 			const copy = JSON.parse(JSON.stringify(state));
 			const result = State.from(copy);
 			expect(state.toJSON()).toEqual(result.toJSON());
@@ -68,20 +68,6 @@ describe('State', () => {
 
 		it('should return the context', () => {
 			expect(state.off(true)).toBe(state);
-		});
-
-	});
-
-	describe('`name()`', () => {
-
-		it('should set the name', () => {
-			state.name('Living Room');
-			expect(state.toJSON().name).toBe('Living Room');
-		});
-
-		it('should return the context', () => {
-			const result = state.name('hey');
-			expect(result).toBe(state);
 		});
 
 	});

@@ -46,18 +46,6 @@ export default class State {
 	}
 
 	/**
-	 * Set the light's name.
-	 *
-	 * @param  {String} name - The new name of the light.
-	 * @returns {this} - The context.
-	 */
-	name (name) {
-		this[update].name = name;
-
-		return this;
-	}
-
-	/**
 	 * Set the color hue a light should be.
 	 *
 	 * @param  {Number} degrees - A number from 0-360, representing
