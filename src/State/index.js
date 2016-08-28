@@ -7,15 +7,24 @@ export default class State {
 	 * Pull in a hue state and mutate it as an update. Also
 	 * works with old update instances.
 	 *
-	 * @param {Object} source - A bridge api-compliant light
+	 * @param {Object} source - A bridge api-compliant state
 	 * object. Can also be an object from an State instance.
 	 * @returns {State} - A new update instance.
 	 */
 	static 'from' (source) {
-		const value = new State();
-		value[update] = source;
+		const state = new State();
 
-		return value;
+		Object.keys(source).filter((key) => (
+			key !== 'ct' &&
+			key !== 'xy' &&
+			key !== 'alert' &&
+			key !== 'reachable' &&
+			key !== 'colormode'
+		)).forEach((key) => {
+			state[update][key] = source[key];
+		});
+
+		return state;
 	}
 
 	constructor () {

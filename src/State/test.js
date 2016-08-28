@@ -10,7 +10,7 @@ describe('State', () => {
 	describe('.from', () => {
 
 		it('should create a new state', () => {
-			const state = State.from();
+			const state = State.from({});
 			expect(state).toBeAn(State);
 		});
 
@@ -24,10 +24,33 @@ describe('State', () => {
 		});
 
 		it('should accept former state instances', () => {
-			state.blink();
+			state.color('blue');
 			const copy = JSON.parse(JSON.stringify(state));
 			const result = State.from(copy);
 			expect(state.toJSON()).toEqual(result.toJSON());
+		});
+
+		it('should ignore non-hsl color modes', () => {
+			const state = State.from({
+				xy: [1.5, 2.5],
+				ct: 123,
+				hue: 5,
+			});
+
+			expect(state.toJSON()).toEqual({
+				hue: 5,
+			});
+		});
+
+		it('should ignore useless properties', () => {
+			const state = State.from({
+				reachable: true,
+				colormode: 'xy',
+				alert: 'lselect',
+				hue: 5,
+			});
+
+			expect(state.toJSON()).toEqual({ hue: 5 });
 		});
 
 	});
