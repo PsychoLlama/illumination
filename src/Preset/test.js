@@ -118,6 +118,28 @@ describe('Preset', () => {
 
 	});
 
+	describe('`.transition`', () => {
+
+		beforeEach(() => {
+			preset.add(1, new Light());
+			preset.add(2, new Light());
+		});
+
+		it('should do things', () => {
+			preset.transition(42);
+			preset.each(({ state }) => {
+				const time = state.toJSON().transitiontime;
+				expect(time).toBe(42 / 100);
+			});
+		});
+
+		it('should return the context', () => {
+			const result = preset.transition(0);
+			expect(result).toBe(preset);
+		});
+
+	});
+
 	describe('`.toJSON`', () => {
 
 		it('should return the list of lights', () => {

@@ -99,6 +99,20 @@ export default class Preset {
 	}
 
 	/**
+	 * Control state transition time for the preset.
+	 *
+	 * @param  {Number} time - The transition in milliseconds.
+	 * @returns {this} - The context.
+	 */
+	transition (time) {
+
+		/** Sets the state transition time for each light. */
+		this.each(({ state }) => state.transition(time));
+
+		return this;
+	}
+
+	/**
 	 * Turn a preset into a serializable structure.
 	 *
 	 * @private
