@@ -25,6 +25,12 @@ describe('Preset', () => {
 		expect(hall.name).toBe('Hall');
 	});
 
+	it('should accept presets as a light list', () => {
+		preset.add('hall', new Light());
+		const copy = new Preset(preset);
+		expect(copy.keys()).toEqual(preset.keys());
+	});
+
 	describe('`.add`', () => {
 
 		it('should add a light to a preset', () => {

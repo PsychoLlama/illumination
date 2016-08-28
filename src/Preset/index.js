@@ -12,6 +12,11 @@ export default class Preset {
 	constructor (lights = {}) {
 		this[list] = {};
 
+		/** Turn presets into lists of lights. */
+		if (lights instanceof Preset) {
+			lights = lights[list];
+		}
+
 		/** Add each light to the list. */
 		Object.entries(lights).forEach(([key, value]) => {
 			this[list][key] = new Light(value);
