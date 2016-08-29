@@ -1,6 +1,7 @@
 import { describe, it, beforeEach, afterEach } from 'mocha';
 import expect, { spyOn } from 'expect';
 import Bridge from './index';
+import Preset from '../Preset';
 import axios from 'axios';
 
 describe('Bridge', () => {
@@ -54,6 +55,34 @@ describe('Bridge', () => {
 
 			const response = await bridge.get('lights');
 			expect(response).toBe('success');
+		});
+
+	});
+
+	describe('`.apply`', () => {
+		const spy = spyOn(axios, 'put');
+		afterEach(() => spy.reset());
+
+		const preset = new Preset({
+			1: {},
+		});
+
+		it('should send the preset to the bridge', () => {
+			bridge.apply(preset);
+
+			expect(spy).toHaveBeenCalledWith(
+				'http://localhost/api/api-key/lights/1/state',
+				preset.get(1).state
+			);
+		});
+
+		it('should resolve when the requests finish', async () => {
+			const resolved = Promise.resolve({ data: null });
+			spy.andReturn(resolved);
+
+			const req = bridge.apply(preset);
+
+			return await req;
 		});
 
 	});

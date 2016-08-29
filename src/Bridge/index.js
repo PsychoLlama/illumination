@@ -62,4 +62,24 @@ export default class Bridge {
 		/** Dispatch the request. */
 		return axios.get(url).then((res) => res.data);
 	}
+
+	/**
+	 * Apply a preset.
+	 *
+	 * @param  {Preset} preset - The preset instance.
+	 * @returns {Promise} - Resolves when the bridge responds.
+	 */
+	apply (preset) {
+		const reqs = [];
+		const lights = this.url('lights');
+
+		preset.each(({ state }, id) => {
+			const url = `${lights}/${id}/state`;
+			const req = axios.put(url, state);
+
+			reqs.push(req);
+		});
+
+		return Promise.all(reqs);
+	}
 }
