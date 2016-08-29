@@ -11,7 +11,14 @@
     "prepublish": "npm run babel && npm run tests",
     "dev": "npm run babel -- --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "hue",
+    "philips-hue",
+    "lights",
+    "api",
+    "groups",
+    "scenes"
+  ],
   "author": "Jesse Gibson <jesse@gundb.io> (http://techllama.com)",
   "license": "MIT",
   "devDependencies": {
