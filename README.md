@@ -1,6 +1,10 @@
 # illumination
 A small, composable Philips Hue interface for Node and the browser.
 
+[![Travis branch](https://img.shields.io/travis/PsychoLlama/illumination/master.svg?style=flat-square)](https://travis-ci.org/PsychoLlama/illumination)
+[![npm](https://img.shields.io/npm/dt/illumination.svg?style=flat-square)](https://www.npmjs.com/package/illumination)
+[![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/illumination)
+
 > Under development, unstable API.
 
 ## Why?
