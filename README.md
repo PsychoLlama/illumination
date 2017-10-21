@@ -1,11 +1,14 @@
-# illumination
+# [UNMAINTAINED] illumination
 A small, composable Philips Hue interface for Node and the browser.
 
 [![Travis branch](https://img.shields.io/travis/PsychoLlama/illumination/master.svg?style=flat-square)](https://travis-ci.org/PsychoLlama/illumination)
 [![npm](https://img.shields.io/npm/dt/illumination.svg?style=flat-square)](https://www.npmjs.com/package/illumination)
 [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/illumination)
 
-> Under development, unstable API.
+## Maintenance Notice
+This project is unmaintained. This library didn't actually make anything easier, except changing colors. But there are [better libraries](https://github.com/tdukart/hue-colors) out there.
+
+Instead I've turned my attention to building [filament](https://github.com/PsychoLlama/filament), a GraphQL server for Hue lights.
 
 ## Why?
 Hue's API is rather unintuitive, and has more baggage than probably needed. For example: there are three ways to set a lamp color:
